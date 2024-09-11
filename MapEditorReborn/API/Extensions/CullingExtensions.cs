@@ -45,7 +45,7 @@ namespace MapEditorReborn.API.Extensions
         /// Spawns the given <paramref name="networkIdentity"/> for the specified <paramref name="player"/>.
         /// </summary>
         /// <param name="player">The target.</param>
-        /// <param name="networkIdentity">The network identity to spawn.</param>
+        /// <param name="networkIdentity">The network identity to spawn.</param
         public static void SpawnNetworkIdentity(this Player player, NetworkIdentity networkIdentity) =>
             MirrorExtensions.SendSpawnMessageMethodInfo.Invoke(null, new object[] { networkIdentity, player.Connection });
 
