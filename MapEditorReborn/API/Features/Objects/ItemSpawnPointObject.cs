@@ -13,7 +13,8 @@ namespace MapEditorReborn.API.Features.Objects
     using Exiled.API.Features;
     using Exiled.API.Features.Pickups;
     using Exiled.API.Features.Pickups.Projectiles;
-    using Exiled.CustomItems.API.Features;
+    using Exiled.CustomModules.API.Features.CustomItems;
+
     using MEC;
     using Mirror;
     using Serializable;
@@ -125,7 +126,7 @@ namespace MapEditorReborn.API.Features.Objects
 
             for (int i = 0; i < Base.NumberOfItems; i++)
             {
-                if (CustomItem.TrySpawn(Base.Item, transform.position, out Pickup customItem))
+                if (CustomItem.TrySpawn(transform.position, Base.Item, out Pickup customItem))
                 {
                     customItem.Rotation = transform.rotation;
                     customItem.Scale = Base.Scale;

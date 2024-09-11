@@ -149,7 +149,7 @@ namespace MapEditorReborn.API.Features.Objects
                 if (CurrentRoom == null)
                     CurrentRoom = FindRoom();
 
-                return CurrentRoom.Type == RoomType.Surface ? transform.position : CurrentRoom.transform.InverseTransformPoint(transform.position);
+                return CurrentRoom.Type == RoomType.Surface ? transform.position : CurrentRoom.Transform.InverseTransformPoint(transform.position);
             }
         }
 
@@ -164,7 +164,7 @@ namespace MapEditorReborn.API.Features.Objects
                 if (CurrentRoom == null)
                     CurrentRoom = FindRoom();
 
-                Vector3 rotation = CurrentRoom.Type == RoomType.Surface ? transform.eulerAngles : transform.eulerAngles - CurrentRoom.transform.eulerAngles;
+                Vector3 rotation = CurrentRoom.Type == RoomType.Surface ? transform.eulerAngles : transform.eulerAngles - CurrentRoom.Transform.eulerAngles;
 
                 if (gameObject.TryGetComponent(out ObjectRotationComponent rotationComponent))
                 {

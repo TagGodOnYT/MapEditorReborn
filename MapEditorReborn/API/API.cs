@@ -21,6 +21,7 @@ namespace MapEditorReborn.API
     using MapGeneration;
     using Mirror;
     using UnityEngine;
+    using ShootingTarget = AdminToys.ShootingTarget;
 
     /// <summary>
     /// A class which exposes all useful properties and methods to be used in other projects.
@@ -125,12 +126,12 @@ namespace MapEditorReborn.API
             objectList.Add(ObjectType.RagdollSpawnPoint, new GameObject("RagdollSpawnPointObject"));
             objectList.Add(ObjectType.DummySpawnPoint, new GameObject("DummySpawnPointObject"));
 
-            objectList.Add(ObjectType.SportShootingTarget, ToysHelper.SportShootingTargetObject.gameObject);
-            objectList.Add(ObjectType.DboyShootingTarget, ToysHelper.DboyShootingTargetObject.gameObject);
-            objectList.Add(ObjectType.BinaryShootingTarget, ToysHelper.BinaryShootingTargetObject.gameObject);
+            objectList.Add(ObjectType.SportShootingTarget, Exiled.API.Features.Toys.ShootingTargetToy.SportTargetPrefabObject.gameObject);
+            objectList.Add(ObjectType.DboyShootingTarget, Exiled.API.Features.Toys.ShootingTargetToy.DBoyTargetPrefabObject.gameObject);
+            objectList.Add(ObjectType.BinaryShootingTarget, Exiled.API.Features.Toys.ShootingTargetToy.BinaryTargetPrefabObject.gameObject);
 
-            objectList.Add(ObjectType.Primitive, ToysHelper.PrimitiveBaseObject.gameObject);
-            objectList.Add(ObjectType.LightSource, ToysHelper.LightBaseObject.gameObject);
+            objectList.Add(ObjectType.Primitive, Exiled.API.Features.Toys.Primitive.PrefabObject.gameObject);
+            objectList.Add(ObjectType.LightSource, Exiled.API.Features.Toys.Light.PrefabObject.gameObject);
 
             objectList.Add(ObjectType.RoomLight, new GameObject("LightControllerObject"));
 
@@ -170,7 +171,7 @@ namespace MapEditorReborn.API
         /// <param name="position">The object position.</param>
         /// <param name="room">The <see cref="Room"/> whose <see cref="Transform"/> will be used.</param>
         /// <returns>Global position relative to the <see cref="Room"/>. If the <see cref="Room.Type"/> is equal to <see cref="RoomType.Surface"/> the <paramref name="position"/> will be retured with no changes.</returns>
-        public static Vector3 GetRelativePosition(Vector3 position, Room room) => room.Type == RoomType.Surface ? position : room.transform.TransformPoint(position);
+        public static Vector3 GetRelativePosition(Vector3 position, Room room) => room.Type == RoomType.Surface ? position : room.Transform.TransformPoint(position);
 
         /// <summary>
         /// Gets or sets a rotation relative to the <see cref="Room"/>.
@@ -192,7 +193,7 @@ namespace MapEditorReborn.API
             if (room == null)
                 return Quaternion.Euler(rotation);
 
-            return room.Type == RoomType.Surface ? Quaternion.Euler(rotation) : room.transform.rotation * Quaternion.Euler(rotation);
+            return room.Type == RoomType.Surface ? Quaternion.Euler(rotation) : room.Transform.rotation * Quaternion.Euler(rotation);
         }
 
         /// <summary>

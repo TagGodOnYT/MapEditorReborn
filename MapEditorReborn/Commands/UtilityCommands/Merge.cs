@@ -7,7 +7,8 @@ namespace MapEditorReborn.Commands.UtilityCommands
     using API.Features;
     using API.Features.Serializable;
     using CommandSystem;
-    using Exiled.API.Features.Pools;
+    using Exiled.API.Features;
+    using Exiled.API.Features.Core.Generic.Pools;
     using Exiled.Loader;
     using Exiled.Permissions.Extensions;
 
@@ -64,7 +65,7 @@ namespace MapEditorReborn.Commands.UtilityCommands
 
             ListPool<MapSchematic>.Pool.Return(maps);
 
-            File.WriteAllText(Path.Combine(MapEditorReborn.MapsDir, $"{outputMap.Name}.yml"), Loader.Serializer.Serialize(outputMap));
+            File.WriteAllText(Path.Combine(MapEditorReborn.MapsDir, $"{outputMap.Name}.yml"), EConfig.Serializer.Serialize(outputMap));
 
             response = $"You've successfully merged {arguments.Count - 1} maps into one!";
             return true;

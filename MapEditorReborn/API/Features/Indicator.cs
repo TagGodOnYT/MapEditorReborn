@@ -14,7 +14,8 @@ namespace MapEditorReborn.API.Features
     using Exiled.API.Extensions;
     using Exiled.API.Features.Items;
     using Exiled.API.Features.Pickups;
-    using Exiled.CustomItems.API.Features;
+    using Exiled.CustomModules.API.Features.CustomItems;
+
     using Extensions;
     using InventorySystem.Items.Pickups;
     using Mirror;
@@ -41,7 +42,7 @@ namespace MapEditorReborn.API.Features
 
             if (CustomItem.TryGet(itemSpawnPoint.Base.Item, out CustomItem custom))
             {
-                parsedItem = custom.Type;
+                parsedItem = custom.ItemType;
             }
             else
             {

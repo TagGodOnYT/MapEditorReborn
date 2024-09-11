@@ -66,7 +66,7 @@ namespace MapEditorReborn.API.Features.Objects
 
                 if (ForcedRoomType != RoomType.Surface)
                 {
-                    lightController = room.GetComponentInChildren<RoomLightController>();
+                    lightController = room.GameObject.GetComponentInChildren<RoomLightController>();
                 }
                 else
                 {

@@ -7,6 +7,7 @@
 
 namespace MapEditorReborn.API.Extensions
 {
+    using Exiled.API.Extensions;
     using Exiled.API.Features;
     using Features.Objects;
     using Mirror;
@@ -35,7 +36,9 @@ namespace MapEditorReborn.API.Extensions
         public static void DestroySchematic(this Player player, SchematicObject schematic)
         {
             foreach (NetworkIdentity networkIdentity in schematic.NetworkIdentities)
+            {
                 player.DestroyNetworkIdentity(networkIdentity);
+            }
         }
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace MapEditorReborn.API.Extensions
         /// <param name="player">The target.</param>
         /// <param name="networkIdentity">The network identity to spawn.</param>
         public static void SpawnNetworkIdentity(this Player player, NetworkIdentity networkIdentity) =>
-            Server.SendSpawnMessage.Invoke(null, new object[] { networkIdentity, player.Connection });
+            MirrorExtensions.SendSpawnMessageMethodInfo.Invoke(null, new object[] { networkIdentity, player.Connection });
 
         /// <summary>
         /// Destroys the given <paramref name="networkIdentity"/> for the specified <paramref name="player"/>.

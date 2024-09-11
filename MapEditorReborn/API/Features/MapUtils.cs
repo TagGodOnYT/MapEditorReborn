@@ -402,7 +402,7 @@ namespace MapEditorReborn.API.Features
                 Config.EnableFileSystemWatcher = false;
 
             Log.Debug("Trying to serialize the MapSchematic...");
-            File.WriteAllText(path, Loader.Serializer.Serialize(map));
+            File.WriteAllText(path, EConfig.Serializer.Serialize(map));
 
             Log.Debug("MapSchematic has been successfully saved to a file!");
             Timing.CallDelayed(1f, () => Config.EnableFileSystemWatcher = prevValue);
@@ -423,7 +423,7 @@ namespace MapEditorReborn.API.Features
             if (!File.Exists(path))
                 return null;
 
-            MapSchematic map = Loader.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(path));
+            MapSchematic map = EConfig.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(path));
             map.Name = mapName;
 
             return map;

@@ -12,7 +12,8 @@ namespace MapEditorReborn.API.Extensions
     using Exiled.API.Features;
     using Exiled.API.Features.Pickups;
     using Exiled.API.Features.Pickups.Projectiles;
-    using Exiled.CustomItems.API.Features;
+    using Exiled.CustomModules.API.Features.CustomItems;
+
     using InventorySystem.Items.Pickups;
     using MapGeneration.Distributors;
     using Mirror;

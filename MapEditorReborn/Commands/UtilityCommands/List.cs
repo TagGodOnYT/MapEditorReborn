@@ -15,6 +15,7 @@ namespace MapEditorReborn.Commands.UtilityCommands
     using API.Enums;
     using API.Features.Serializable;
     using CommandSystem;
+    using Exiled.API.Features;
     using Exiled.Loader;
     using Exiled.Permissions.Extensions;
     using NorthwoodLib.Pools;
@@ -93,7 +94,7 @@ namespace MapEditorReborn.Commands.UtilityCommands
             {
                 if (path.EndsWith(".yml"))
                 {
-                    MapSchematic map = Loader.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(path));
+                    MapSchematic map = EConfig.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(path));
 
                     builder.AppendLine();
                     builder.AppendLine($"<color=green><b>{Path.GetFileNameWithoutExtension(path)}</b></color>");

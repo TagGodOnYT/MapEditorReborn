@@ -19,17 +19,19 @@ namespace MapEditorReborn.Events.Handlers.Internal
     using Exiled.API.Enums;
     using Exiled.API.Features;
     using Exiled.API.Features.Items;
-    using Exiled.API.Features.Pools;
-    using Exiled.CustomItems.API.Features;
+    using Exiled.CustomModules.API.Features.CustomItems;
     using Exiled.Events.EventArgs.Map;
     using Exiled.Events.EventArgs.Player;
     using Exiled.Loader;
+    using Exiled.API.Features.Core.Generic.Pools;
     using Interactables.Interobjects.DoorUtils;
     using InventorySystem.Items.Firearms.Modules;
     using MEC;
     using UnityEngine;
     using static API.API;
     using Config = Configs.Config;
+    using System.Linq;
+    using MapGeneration.Distributors;
 
     /// <summary>
     /// Handles mostly EXILED events.
@@ -112,7 +114,7 @@ namespace MapEditorReborn.Events.Handlers.Internal
                     try
                     {
                         Log.Debug("Trying to deserialize the file... (called by FileSytemWatcher)");
-                        CurrentLoadedMap = Loader.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(ev.FullPath));
+                        CurrentLoadedMap = EConfig.Deserializer.Deserialize<MapSchematic>(File.ReadAllText(ev.FullPath));
                         CurrentLoadedMap.Name = fileName;
                     }
                     catch (Exception e)
@@ -170,7 +172,7 @@ namespace MapEditorReborn.Events.Handlers.Internal
 
         internal static void OnInteractingLocker(InteractingLockerEventArgs ev)
         {
-            if (!ev.Locker.TryGetComponent(out LockerObject locker))
+            if (!ev.LockerChamber.Locker.Base.TryGetComponent(out LockerObject locker))
                 return;
 
             if (!locker.Base.AllowedRoleTypes.Contains(ev.Player.Role.Type.ToString()))
@@ -179,16 +181,16 @@ namespace MapEditorReborn.Events.Handlers.Internal
                 return;
             }
 
-            if (!locker.Base.InteractLock)
+            if (!ev.LockerChamber.CanInteract)
                 return;
 
-            if (locker._usedChambers.Contains(ev.Chamber))
+            if (locker._usedChambers.Contains(ev.LockerChamber.Base))
             {
                 ev.IsAllowed = false;
                 return;
             }
 
-            locker._usedChambers.Add(ev.Chamber);
+            locker._usedChambers.Add(ev.LockerChamber.Base);
         }
 
         private static void AutoLoadMaps(List<string> names)
